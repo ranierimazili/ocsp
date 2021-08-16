@@ -1,19 +1,11 @@
+os: linux
+dist: focal
+
 language: node_js
+
 node_js:
-  - "6"
-  - "4"
-  - "0.12"
-  - "iojs"
-
-matrix:
-  fast_finish: true
-  allow_failures:
-    - node_js: "0.12"
-    - node_js: "iojs"
-
-branches:
-  only:
-    - master
+  - "14"
+  - "12"
 
 script:
   - npm run lint

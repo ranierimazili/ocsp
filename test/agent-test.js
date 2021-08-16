@@ -1,34 +1,34 @@
-var ocsp = require('../');
-var fixtures = require('./fixtures');
+const ocsp = require('../')
+const fixtures = require('./fixtures')
 
-var assert = require('assert');
-var https = require('https');
+const assert = require('assert')
+const https = require('https')
 
-describe('OCSP Agent', function() {
-  var a;
-  beforeEach(function() {
-    a = new ocsp.Agent();
-  });
+describe('OCSP Agent', function () {
+  let a
+  beforeEach(function () {
+    a = new ocsp.Agent()
+  })
 
-  var websites = [
+  const websites = [
     'www.google.com',
     'google.com',
     'helloworld.letsencrypt.org',
     'yahoo.com',
     'nytimes.com',
     'microsoft.com'
-  ];
+  ]
 
-  websites.forEach(function(host) {
-    it('should connect and validate ' + host, function(cb) {
-      var req = https.get({
+  websites.forEach(function (host) {
+    it('should connect and validate ' + host, function (cb) {
+      const req = https.get({
         host: host,
         port: 443,
         agent: a
-      }, function(res) {
-        res.resume();
-        cb();
-      });
-    });
-  });
-});
+      }, function (res) {
+        res.resume()
+        cb()
+      })
+    })
+  })
+})

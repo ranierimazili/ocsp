@@ -1,48 +1,47 @@
-var ocsp = require('../');
-var fixtures = require('./fixtures');
+const ocsp = require('../')
+const fixtures = require('./fixtures')
 
-var assert = require('assert');
+const assert = require('assert')
 
-describe('OCSP Server', function() {
-  var issuer = fixtures.certs.issuer;
-  var good = fixtures.certs.good;
-  var revoked = fixtures.certs.revoked;
+describe('OCSP Server', function () {
+  const issuer = fixtures.certs.issuer
+  const good = fixtures.certs.good
+  const revoked = fixtures.certs.revoked
 
-  it('should provide ocsp response to the client', function(cb) {
-    var server = ocsp.Server.create({
+  it('should provide ocsp response to the client', function (cb) {
+    const server = ocsp.Server.create({
       cert: issuer.cert,
       key: issuer.key
-    });
+    })
 
-    server.addCert(43, 'good');
+    server.addCert(43, 'good')
     server.addCert(44, 'revoked', {
       revocationTime: new Date(),
       revocationReason: 'cACompromise'
-    });
+    })
 
-    server.listen(8000, function() {
+    server.listen(8000, function () {
       ocsp.check({
         cert: good.cert,
         issuer: issuer.cert
-      }, function(err, res) {
-        if (err)
-          throw err;
+      }, function (err, res) {
+        if (err) { throw err }
 
-        assert.equal(res.type, 'good');
+        assert.equal(res.type, 'good')
 
-        next();
-      });
-    });
+        next()
+      })
+    })
 
-    function next() {
+    function next () {
       ocsp.check({
         cert: revoked.cert,
         issuer: issuer.cert
-      }, function(err, res) {
-        assert(err);
-        assert.equal(res.type, 'revoked');
-        cb();
-      });
+      }, function (err, res) {
+        assert(err)
+        assert.equal(res.type, 'revoked')
+        cb()
+      })
     }
-  });
-});
+  })
+})
