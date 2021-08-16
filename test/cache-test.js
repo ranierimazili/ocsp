@@ -1,7 +1,6 @@
 const ocsp = require('../')
 const fixtures = require('./fixtures')
 
-const assert = require('assert')
 const https = require('https')
 
 describe('OCSP Cache', function () {
@@ -11,6 +10,7 @@ describe('OCSP Cache', function () {
 
   let server
   let agent
+  let cache
   beforeEach(function (cb) {
     server = ocsp.Server.create({
       cert: issuer.cert,
@@ -60,16 +60,18 @@ describe('OCSP Cache', function () {
       })
     })
 
-    httpServer.listen(8001, function () {
-      https.get({
+    httpServer.listen(8001, () => {
+      const req = https.get({
         agent: agent,
         ca: issuer.cert,
-        rejectUnauthorized: !/^v0.12/.test(process.version),
+        rejectUnauthorized: false,
         servername: 'local.host',
         port: 8001
-      }, function (res) {
+      }, (res) => {
         cb()
       })
+
+      req.on('error', (cb))
     })
   })
 })

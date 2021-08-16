@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs')
+const path = require('path')
 const fixtures = require('../fixtures')
 
 const options = {
@@ -10,8 +11,8 @@ const options = {
 }
 
 fixtures.getOCSPCert(options, function (cert, key) {
-  fs.writeFileSync(__dirname + '/issuer-cert.pem', cert)
-  fs.writeFileSync(__dirname + '/issuer-key.pem', key)
+  fs.writeFileSync(path.join(__dirname, 'issuer-cert.pem'), cert)
+  fs.writeFileSync(path.join(__dirname, ' issuer-key.pem'), key)
 
   const options = {
     issuer: cert,
@@ -21,13 +22,13 @@ fixtures.getOCSPCert(options, function (cert, key) {
   }
 
   fixtures.getOCSPCert(options, function (cert, key) {
-    fs.writeFileSync(__dirname + '/good-cert.pem', cert)
-    fs.writeFileSync(__dirname + '/good-key.pem', key)
+    fs.writeFileSync(path.join(__dirname, 'good-cert.pem'), cert)
+    fs.writeFileSync(path.join(__dirname, 'good-key.pem'), key)
 
     options.serial++
     fixtures.getOCSPCert(options, function (cert, key) {
-      fs.writeFileSync(__dirname + '/revoked-cert.pem', cert)
-      fs.writeFileSync(__dirname + '/revoked-key.pem', key)
+      fs.writeFileSync(path.join(__dirname, 'revoked-cert.pem'), cert)
+      fs.writeFileSync(path.join(__dirname, 'revoked-key.pem'), key)
     })
   })
 })

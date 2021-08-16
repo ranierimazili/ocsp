@@ -1,6 +1,7 @@
 const ocsp = require('../../')
 
 const fs = require('fs')
+const path = require('path')
 const rfc2560 = require('asn1.js-rfc2560')
 const rfc5280 = require('asn1.js-rfc5280')
 const keyGen = require('selfsigned.js').create()
@@ -14,16 +15,16 @@ const keyGen = require('selfsigned.js').create()
            accessLocation        GeneralName  }
  */
 
-exports.google = fs.readFileSync(__dirname + '/google-cert.pem')
-exports.googleIssuer = fs.readFileSync(__dirname + '/google-issuer.pem')
-exports.noExts = fs.readFileSync(__dirname + '/no-exts-cert.pem')
+exports.google = fs.readFileSync(path.join(__dirname, 'google-cert.pem'))
+exports.googleIssuer = fs.readFileSync(path.join(__dirname, 'google-issuer.pem'))
+exports.noExts = fs.readFileSync(path.join(__dirname, 'no-exts-cert.pem'))
 
 exports.certs = {};
 
 ['issuer', 'good', 'revoked'].forEach(function (name) {
   exports.certs[name] = {
-    cert: fs.readFileSync(__dirname + '/' + name + '-cert.pem'),
-    key: fs.readFileSync(__dirname + '/' + name + '-key.pem')
+    cert: fs.readFileSync(path.join(__dirname, name + '-cert.pem')),
+    key: fs.readFileSync(path.join(__dirname, name + '-key.pem'))
   }
 })
 
@@ -88,7 +89,7 @@ exports.getOCSPCert = function getOCSPCert (options, cb) {
       issuer: issuer,
       issuerKeyData: issuerKeyData,
       extensions: [{
-        extnID: rfc5280['id-pe-authorityInfoAccess'],
+        extnID: [1, 3, 6, 1, 5, 5, 7, 1, 1], // rfc5280['id-pe-authorityInfoAccess'],
         critical: false,
         extnValue: ext
       }]

@@ -27,7 +27,7 @@ describe('OCSP Server', function () {
       }, function (err, res) {
         if (err) { throw err }
 
-        assert.equal(res.type, 'good')
+        assert.strictEqual(res.certStatus.type, 'good')
 
         next()
       })
@@ -39,7 +39,7 @@ describe('OCSP Server', function () {
         issuer: issuer.cert
       }, function (err, res) {
         assert(err)
-        assert.equal(res.type, 'revoked')
+        assert.strictEqual(res.certStatus.type, 'revoked')
         cb()
       })
     }
