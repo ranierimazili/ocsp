@@ -8,8 +8,13 @@ describe('OCSP Server', function () {
   const good = fixtures.certs.good
   const revoked = fixtures.certs.revoked
 
+  let server
+  after(function (cb) {
+    server.close(cb)
+  })
+
   it('should provide ocsp response to the client', function (cb) {
-    const server = ocsp.Server.create({
+    server = ocsp.Server.create({
       cert: issuer.cert,
       key: issuer.key
     })

@@ -11,7 +11,7 @@ describe('OCSP Cache', function () {
   let server
   let agent
   let cache
-  beforeEach(function (cb) {
+  before(function (cb) {
     server = ocsp.Server.create({
       cert: issuer.cert,
       key: issuer.key
@@ -32,13 +32,15 @@ describe('OCSP Cache', function () {
     cache = new ocsp.Cache()
   })
 
-  afterEach(function (cb) {
-    server.close(cb)
-    agent = null
+  after(function (cb) {
+    agent.destroy()
+    server.close(() => {
+      httpServer.close(cb)
+    })
   })
 
   it('should cache ocsp response', function (cb) {
-    const httpServer = https.createServer({
+    httpServer = https.createServer({
       cert: good.cert + '\n' + good.issuer,
       key: good.key
     }, function (req, res) {
@@ -64,7 +66,6 @@ describe('OCSP Cache', function () {
 
     httpServer.listen(8001, () => {
       const req = https.get({
-        agent: agent,
         ca: issuer.cert,
         rejectUnauthorized: false,
         servername: 'local.host',
@@ -74,6 +75,7 @@ describe('OCSP Cache', function () {
       })
 
       req.on('error', cb)
+      req.end()
     })
   })
 })

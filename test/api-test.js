@@ -46,8 +46,7 @@ describe('OCSP Stapling Provider', function () {
                   return cb(err)
                 }
                 assert.strictEqual(res.certStatus.type, 'good')
-                client.destroy()
-                cb()
+                socket.end(cb)
               })
             } else {
               cb(new Error('empty stapling'))
