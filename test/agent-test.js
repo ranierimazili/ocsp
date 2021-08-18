@@ -2,6 +2,9 @@ const ocsp = require('../')
 const https = require('https')
 
 describe('OCSP Agent', function () {
+  // Retry all tests in this suite up to 4 times
+  this.retries(4)
+
   let a
   beforeEach(function () {
     a = new ocsp.Agent()

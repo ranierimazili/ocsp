@@ -47,7 +47,9 @@ describe('OCSP Cache', function () {
 
     httpServer.on('OCSPRequest', function (cert, issuer, cb) {
       ocsp.getOCSPURI(cert, function (err, uri) {
-        if (err) { return cb(err) }
+        if (err) {
+          return cb(err)
+        }
 
         const req = ocsp.request.generate(cert,
           issuer || fixtures.certs.issuer.cert)
@@ -71,7 +73,7 @@ describe('OCSP Cache', function () {
         cb()
       })
 
-      req.on('error', (cb))
+      req.on('error', cb)
     })
   })
 })
