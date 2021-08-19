@@ -45,6 +45,7 @@ describe('OCSP Stapling Provider', function () {
                   return cb(err)
                 }
                 assert.strictEqual(res.certStatus.type, 'good')
+                client.destroy()
                 socket.end(cb)
               })
             } else {

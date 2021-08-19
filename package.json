@@ -5,7 +5,7 @@
   "main": "lib/ocsp.js",
   "scripts": {
     "lint": "standard --env mocha",
-    "test": "mocha --exit"
+    "test": "mocha"
   },
   "keywords": [
     "OCSP",
