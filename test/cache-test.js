@@ -6,9 +6,10 @@ const https = require('https')
 describe('OCSP Cache', function () {
   const issuer = fixtures.certs.issuer
   const good = fixtures.certs.good
-  const revoked = fixtures.certs.revoked
+  // const revoked = fixtures.certs.revoked
 
   let server
+  let httpServer
   let agent
   let cache
   before(function (cb) {

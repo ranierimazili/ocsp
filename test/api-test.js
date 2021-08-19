@@ -2,7 +2,6 @@ const ocsp = require('../')
 const fixtures = require('./fixtures')
 
 const assert = require('assert')
-const https = require('https')
 const tls = require('tls')
 const net = require('net')
 

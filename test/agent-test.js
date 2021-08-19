@@ -21,7 +21,7 @@ describe('OCSP Agent', function () {
 
   websites.forEach(function (host) {
     it('should connect and validate ' + host, function (cb) {
-      const req = https.get({
+      https.get({
         host: host,
         port: 443,
         agent: a
@@ -46,7 +46,7 @@ describe('OCSP Agent failed', function () {
 
   websites.forEach(function (host) {
     it('should connect and emit error ' + host, function (cb) {
-      const req = https.get({
+      https.get({
         host: host,
         port: 443,
         agent: a
