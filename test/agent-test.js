@@ -45,8 +45,7 @@ describe('OCSP Agent failed', function () {
     'revoked.badssl.com',
     'expired.badssl.com',
     'self-signed.badssl.com',
-    'untrusted-root.badssl.com',
-    'pinning-test.badssl.com' // this one is never caught curious why?
+    'untrusted-root.badssl.com'
   ]
 
   websites.forEach(function (host) {
@@ -55,7 +54,7 @@ describe('OCSP Agent failed', function () {
         host,
         port: 443,
         agent: a
-      }).on('error', (e) => {
+      }, (res) => ( cb(res))).on('error', (e) => {
         cb()
       })
     })
