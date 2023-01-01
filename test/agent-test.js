@@ -54,7 +54,7 @@ describe('OCSP Agent failed', function () {
         host,
         port: 443,
         agent: a
-      }, (res) => ( cb(res))).on('error', (e) => {
+      }).on('error', (e) => {
         cb()
       })
     })
