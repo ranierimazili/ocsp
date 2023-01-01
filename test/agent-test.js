@@ -41,7 +41,12 @@ describe('OCSP Agent failed', function () {
 
   const websites = [
     'p.vj-vid.com',
-    'vast.bp3861034.btrll.com'
+    'vast.bp3861034.btrll.com',
+    'revoked.badssl.com',
+    'expired.badssl.com',
+    'self-signed.badssl.com',
+    'untrusted-root.badssl.com',
+    'pinning-test.badssl.com', // this one is never caught curious why?
   ]
 
   websites.forEach(function (host) {
