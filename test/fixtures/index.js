@@ -37,7 +37,7 @@ req.on('socket', socket => {
   socket.on('secureConnect', () => {
     const googleCerts = socket.getPeerCertificate(true)
     exports.google = '-----BEGIN CERTIFICATE-----\n' + googleCerts.raw.toString('base64') + '\n-----END CERTIFICATE-----'
-    exports.googleIssuer ='-----BEGIN CERTIFICATE-----\n' + googleCerts.issuerCertificate.raw.toString('base64') + '\n-----END CERTIFICATE-----'
+    exports.googleIssuer = '-----BEGIN CERTIFICATE-----\n' + googleCerts.issuerCertificate.raw.toString('base64') + '\n-----END CERTIFICATE-----'
   })
 })
 

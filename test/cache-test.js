@@ -34,6 +34,7 @@ describe('OCSP Cache', function () {
   })
 
   after(function (cb) {
+    this.timeout(5100) // since node 19, http.globalAgent uses keep-alive connections default
     agent.destroy()
     server.close(() => {
       httpServer.close(cb)
