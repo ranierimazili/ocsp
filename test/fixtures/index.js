@@ -84,10 +84,10 @@ exports.getOCSPCert = function getOCSPCert (options, cb) {
   getKeyData(function (keyData) {
     const certData = keyGen.getCertData({
       serial: options.serial,
-      keyData: keyData,
-      commonName: commonName,
-      issuer: issuer,
-      issuerKeyData: issuerKeyData,
+      keyData,
+      commonName,
+      issuer,
+      issuerKeyData,
       extensions: [{
         extnID: [1, 3, 6, 1, 5, 5, 7, 1, 1], // rfc5280['id-pe-authorityInfoAccess'],
         critical: false,
