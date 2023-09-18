@@ -1,6 +1,6 @@
 {
-  "name": "@techteamer/ocsp",
-  "version": "1.0.1",
+  "name": "@ranierimazili/ocsp",
+  "version": "1.0.2",
   "description": "OCSP Stapling implementation",
   "main": "lib/ocsp.js",
   "scripts": {
@@ -12,10 +12,10 @@
     "ASN.1",
     "Stapling"
   ],
-  "author": "Fedor Indutny <fedor@indutny.com>",
+  "author": "Ranieri Mazili <ranieri85@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TechTeamer/ocsp.git"
+    "url": "git+https://github.com/ranierimazili/ocsp.git"
   },
   "license": "MIT",
   "devDependencies": {

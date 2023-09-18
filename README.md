@@ -27,6 +27,9 @@ requests.
 This package is a fork of https://github.com/indutny/ocsp
 
 ## Changelog
+### 1.0.2
+- added the option requestByGet on check method to make GET OCSP requests instead of POST
+
 ### 1.0.1
 - node 16,18 compatibility
 - tests fixed
