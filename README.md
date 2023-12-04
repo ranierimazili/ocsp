@@ -1,5 +1,8 @@
 # OCSP client and server implementation in nodejs
 
+## Fork Changes
+In **ocsp.check** method was included a new option (requestByGet) to allow ocsp requests using GET method. You can see an usage example on [this project](https://github.com/ranierimazili/o2b2-ocsp-tests)
+
 ## Server Usage Updated!
 
 Usage:
